@@ -36,7 +36,7 @@ Gem::Specification.new do |s|
   ]
   s.homepage = "http://github.com/johnnyt/nsq-ruby"
   s.licenses = ["MIT"]
-  s.rubygems_version = "2.4.5"
+  s.rubygems_version = "2.2.2"
   s.summary = "MagLev Ruby client library for NSQ"
 
   if s.respond_to? :specification_version then
