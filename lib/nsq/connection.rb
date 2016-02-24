@@ -91,16 +91,16 @@ module Nsq
 
 
     def pub(topic, message)
-      write ["PUB #{topic}\n", message.bytesize, message].pack('a*l>a*')
+      write ["PUB #{topic}\n", message.bytesize, message].pack('a*Na*')
     end
 
 
     def mpub(topic, messages)
       body = messages.map do |message|
-        [message.bytesize, message].pack('l>a*')
+        [message.bytesize, message].pack('Na*')
       end.join
 
-      write ["MPUB #{topic}\n", body.bytesize, messages.size, body].pack('a*l>l>a*')
+      write ["MPUB #{topic}\n", body.bytesize, messages.size, body].pack('a*NNa*')
     end
 
 
@@ -153,7 +153,7 @@ module Nsq
         user_agent: USER_AGENT,
         msg_timeout: @msg_timeout
       }.to_json
-      write_to_socket ["IDENTIFY\n", metadata.length, metadata].pack('a*l>a*')
+      write_to_socket ["IDENTIFY\n", metadata.length, metadata].pack('a*Na*')
 
       # Now wait for the response!
       frame = receive_frame
@@ -181,7 +181,7 @@ module Nsq
 
     def receive_frame
       if buffer = @socket.read(8)
-        size, type = buffer.unpack('l>l>')
+        size, type = buffer.unpack('NN')
         size -= 4 # we want the size of the data part and type already took up 4 bytes
         data = @socket.read(size)
         frame_class = frame_class_for_type(type)

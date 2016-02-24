@@ -17,11 +17,11 @@ require 'jeweler'
 require_relative 'lib/version'
 Jeweler::Tasks.new do |gem|
   # gem is a Gem::Specification... see http://guides.rubygems.org/specification-reference/ for more options
-  gem.name = "nsq-ruby"
+  gem.name = "nsq-ruby-maglev-"
   gem.version = Nsq::Version::STRING
-  gem.homepage = "http://github.com/wistia/nsq-ruby"
+  gem.homepage = "http://github.com/johnnyt/nsq-ruby"
   gem.license = "MIT"
-  gem.summary = %Q{Ruby client library for NSQ}
+  gem.summary = %Q{MagLev Ruby client library for NSQ}
   gem.description = %Q{}
   gem.email = "dev@wistia.com"
   gem.authors = ["Wistia"]
